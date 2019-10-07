@@ -7,16 +7,15 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        dotnet: [ '2.2.402', '3.0.100' ]
-
     steps:
     - uses: actions/checkout@v1
     - uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: ${{ matrix.dotnet }}
-    - name: build ${{ matrix.dotnet }}
+        dotnet-version: '3.0.100'
+    - name: build
       run: dotnet build
-    - name: test ${{ matrix.dotnet }}
-      run: dotnet test
+    - name: test
+      strategy:
+        matrix:
+          dotnet: [ 'netcoreapp2.2', 'netcoreapp3.0' ]
+      run: dotnet test --framework ${{ matrix.dotnet }}
