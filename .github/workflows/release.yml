@@ -5,7 +5,7 @@ on:
     branches:
       - actions
     tags:
-      - *
+      - !dummy
 
 jobs:
   release:
