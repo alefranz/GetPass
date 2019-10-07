@@ -1,11 +1,11 @@
-name: build
+name: release
 
 on:
   push:
     branches:
       - actions
     tags:
-      - !dummy
+      - '!dummy'
 
 jobs:
   release:
