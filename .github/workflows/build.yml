@@ -1,6 +1,6 @@
 name: build
 
-on: [push]
+on: push
 
 jobs:
   build:
@@ -15,6 +15,6 @@ jobs:
     - name: build
       run: dotnet build
     - name: test 2.2
-      run: dotnet test --framework netcoreapp2.2 --no-build 
+      run: dotnet test --framework netcoreapp2.2 --no-build
     - name: test 3.0
-      run: dotnet test --framework netcoreapp3.0 --no-build 
+      run: dotnet test --framework netcoreapp3.0 --no-build
