@@ -3,7 +3,7 @@ name: release
 on:
   push:
     branches:
-      - actions
+      - 'actions'
     tags:
       - '!dummy'
 
@@ -17,6 +17,7 @@ jobs:
     - uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '3.0.100'
+    - run: mkdir -p artifacts
     - uses: actions/upload-artifact@master
       with:
         name: package
