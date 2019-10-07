@@ -16,7 +16,10 @@ jobs:
     - uses: actions/checkout@v1
     - uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: [ '2.2.402', 3.0.100' ]
+        dotnet-version: '2.2.402'
+    - uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '3.0.100'
     - run: mkdir -p artifacts
     - uses: actions/upload-artifact@master
       with:
