@@ -1,0 +1,23 @@
+name: build
+
+on:
+  push:
+    branches:
+      - '!dummy'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '3.0.100'
+    - name: build
+      run: dotnet build
+    - name: test 2.2
+      run: dotnet test --framework netcoreapp2.2 --no-build
+    - name: test 3.0
+      run: dotnet test --framework netcoreapp3.0 --no-build

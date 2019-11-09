@@ -1,0 +1,38 @@
+name: release
+
+on:
+  push:
+    branches:
+      - 'actions'
+    tags:
+      - '!dummy'
+
+jobs:
+  release:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '2.2.402'
+    - uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '3.0.100'
+    - run: mkdir -p artifacts
+    - uses: actions/upload-artifact@master
+      with:
+        name: package
+        path: artifacts
+    - name: build
+      run: dotnet build -c Release
+    - name: test 2.2
+      run: dotnet test -c Release --framework netcoreapp2.2 --no-build
+    - name: test 3.0
+      run: dotnet test -c Release --framework netcoreapp3.0 --no-build
+    - name: pack
+      shell: bash
+      run: |
+        version=`git describe --tags --dirty`
+        dotnet pack -c Release --no-build -o artifacts -p:Version=$version
